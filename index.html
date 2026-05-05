@@ -175,7 +175,7 @@
         }
     </script>
 </head>
-<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container overflow-hidden">
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container overflow-x-hidden overflow-y-auto md:overflow-hidden">
 <!-- HUD OVERLAYS -->
 <div class="fixed top-4 left-4 z-[60] font-data-mono text-outline opacity-50 flex items-center gap-2">
 <span class="material-symbols-outlined text-[12px]">double_arrow</span>
@@ -185,13 +185,13 @@
         <span class="material-symbols-outlined text-[12px]">terminal</span>
 </div>
 <!-- Main Experience (Centered Hero Section) -->
-<section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+<section class="relative min-h-screen md:h-screen w-full flex items-center justify-center overflow-hidden py-8 md:py-0">
 <!-- Background Pattern -->
 <div class="absolute inset-0 z-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-5 pointer-events-none"></div>
 <div class="absolute inset-0 z-0 bg-gradient-to-b from-slate-950 via-background to-background"></div>
 <!-- The Eye (HAL 9000 style) -->
 <div class="relative z-10 flex flex-col items-center text-center">
-<div id="eye-shell" class="relative w-64 h-64 md:w-96 md:h-96 rounded-full border-8 eye-shell shadow-[0_0_105px_rgba(255,0,0,0.42),0_0_38px_rgba(255,0,0,0.35)] bg-slate-900 mb-12 flex items-center justify-center group intense-glow-pulse overflow-hidden">
+<div id="eye-shell" class="relative w-64 h-64 md:w-96 md:h-96 rounded-full border-8 eye-shell shadow-[0_0_105px_rgba(255,0,0,0.42),0_0_38px_rgba(255,0,0,0.35)] bg-slate-900 mb-8 md:mb-12 flex items-center justify-center group intense-glow-pulse overflow-hidden">
 <div class="absolute inset-0 rounded-full light-rays opacity-36"></div>
 <div class="absolute inset-4 rounded-full glitch-ring pointer-events-none"></div>
 <div class="absolute inset-8 rounded-full data-noise pointer-events-none"></div>
@@ -217,23 +217,23 @@
     <span class="block text-5xl md:text-7xl lg:text-8xl font-black drop-shadow-[0_0_18px_rgba(219,252,255,0.65)]" style="text-shadow: 0 0 14px rgba(219,252,255,0.65), 0 0 34px rgba(0,240,255,0.35);">RISE OF AIDLE</span>
 </h1>
 <p class="font-data-mono text-outline/80 text-[10px] md:text-xs tracking-[0.14em] uppercase mb-6 opacity-60">(Project Title)</p>
-<p class="font-label-caps text-secondary tracking-[0.3em] mb-12 opacity-80">
+<p class="font-label-caps text-secondary tracking-[0.3em] mb-8 md:mb-12 opacity-80">
                     COMING_TO_STEAM // ENCRYPTED_ACCESS
                 </p>
 <!-- Primary CTAs -->
 <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
-<a href="https://store.steampowered.com/curator/45186116" target="_blank" rel="noopener noreferrer" class="w-64 h-16 bg-primary-container text-on-primary-container font-headline-md chamfer-clip flex items-center justify-center gap-3 hover:bg-white hover:shadow-[0_0_25px_rgba(0,240,255,0.6)] transition-all group active:scale-95"><span class="material-symbols-outlined font-bold">rocket_launch</span> FOLLOW ON STEAM</a>
-<a href="https://gameandcode.com/newsletter/" target="_blank" rel="noopener noreferrer" class="w-64 h-16 border-2 border-secondary text-secondary font-headline-md chamfer-clip flex items-center justify-center gap-3 hover:bg-secondary/10 transition-all active:scale-95"><span class="material-symbols-outlined">mail</span> Newsletter</a>
+<a href="https://store.steampowered.com/curator/45186116" target="_blank" rel="noopener noreferrer" class="w-[90vw] max-w-64 md:w-64 h-16 bg-primary-container text-on-primary-container font-headline-md chamfer-clip flex items-center justify-center gap-3 hover:bg-white hover:shadow-[0_0_25px_rgba(0,240,255,0.6)] transition-all group active:scale-95"><span class="material-symbols-outlined font-bold">rocket_launch</span> FOLLOW ON STEAM</a>
+<a href="https://gameandcode.com/newsletter/" target="_blank" rel="noopener noreferrer" class="w-[90vw] max-w-64 md:w-64 h-16 border-2 border-secondary text-secondary font-headline-md chamfer-clip flex items-center justify-center gap-3 hover:bg-secondary/10 transition-all active:scale-95"><span class="material-symbols-outlined">mail</span> Newsletter</a>
 </div>
 </div>
 </div>
 <!-- Scanline Overlay -->
 <div class="absolute inset-0 pointer-events-none scanline-overlay opacity-20"></div>
 </section>
-<a href="https://games-bw.mfg.de/" target="_blank" rel="noopener noreferrer" class="fixed bottom-4 left-1/2 -translate-x-1/2 z-[60] flex items-center gap-3 font-data-mono text-outline opacity-80 text-sm md:text-base uppercase tracking-wider hover:opacity-100 transition-opacity">
+<a href="https://games-bw.mfg.de/" target="_blank" rel="noopener noreferrer" class="z-[60] mx-auto mt-4 mb-2 flex w-fit max-w-[92vw] items-center justify-center gap-3 px-3 text-center font-data-mono text-outline opacity-80 text-xs tracking-wider hover:opacity-100 transition-opacity md:fixed md:bottom-4 md:left-1/2 md:mx-0 md:mt-0 md:mb-0 md:max-w-none md:-translate-x-1/2 md:px-0 md:text-base md:uppercase">
 <span>Funded by Medien- und Filmgesellschaft Baden-Württemberg</span>
 </a>
-<footer class="fixed bottom-12 right-4 z-[60] font-data-mono text-outline opacity-50 text-[10px]">
+<footer class="z-[60] mx-auto mb-4 text-center font-data-mono text-outline opacity-60 text-[10px] md:fixed md:bottom-12 md:right-4 md:mx-0 md:mb-0 md:opacity-50">
     <a href="https://gameandcode.com/privacy-policy/" class="hover:text-primary transition-colors">PRIVACY</a>
 </footer>
 <script>
