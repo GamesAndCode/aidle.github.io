@@ -23,22 +23,67 @@
         }
     
         @keyframes intense-pulse {
-            0%, 100% { transform: scale(1); filter: brightness(1) blur(0px); shadow: 0 0 40px rgba(255, 0, 0, 0.4); }
-            50% { transform: scale(1.05); filter: brightness(1.5) blur(1px); shadow: 0 0 100px rgba(255, 0, 0, 0.8); }
+            0%, 100% { transform: scale(1); filter: brightness(0.98) saturate(1); box-shadow: 0 0 85px rgba(255, 0, 0, 0.3), 0 0 38px rgba(255, 0, 0, 0.24); }
+            50% { transform: scale(1.02); filter: brightness(1.14) saturate(1.1); box-shadow: 0 0 112px rgba(255, 0, 0, 0.4), 0 0 56px rgba(255, 0, 0, 0.3); }
         }
         @keyframes rays-rotation {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
+        @keyframes glitch-jitter {
+            0%, 92%, 100% { transform: translate(0, 0); opacity: 0.22; }
+            93% { transform: translate(-1px, 1px); opacity: 0.38; }
+            95% { transform: translate(1px, -1px); opacity: 0.34; }
+            97% { transform: translate(0, 1px); opacity: 0.28; }
+        }
+        @keyframes data-flicker {
+            0%, 100% { opacity: 0.08; }
+            30% { opacity: 0.12; }
+            31% { opacity: 0.04; }
+            32% { opacity: 0.14; }
+            65% { opacity: 0.06; }
+            66% { opacity: 0.13; }
+        }
+        @keyframes holo-sweep {
+            0% { transform: translateY(-120%); opacity: 0; }
+            20% { opacity: 0.2; }
+            45% { opacity: 0.05; }
+            100% { transform: translateY(120%); opacity: 0; }
+        }
         .intense-glow-pulse {
-            animation: intense-pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            animation: intense-pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
         .light-rays {
-            background: conic-gradient(from 0deg, transparent 0%, rgba(255, 0, 0, 0.1) 10%, transparent 20%, rgba(255, 0, 0, 0.1) 30%, transparent 40%, rgba(255, 0, 0, 0.1) 50%, transparent 60%, rgba(255, 0, 0, 0.1) 70%, transparent 80%, rgba(255, 0, 0, 0.1) 90%, transparent 100%);
+            background: conic-gradient(from 0deg, transparent 0%, rgba(255, 0, 0, 0.06) 10%, transparent 20%, rgba(255, 0, 0, 0.06) 30%, transparent 40%, rgba(255, 0, 0, 0.06) 50%, transparent 60%, rgba(255, 0, 0, 0.06) 70%, transparent 80%, rgba(255, 0, 0, 0.06) 90%, transparent 100%);
             animation: rays-rotation 20s linear infinite;
         }
         .animate-spin-slow {
             animation: rays-rotation 60s linear infinite;
+        }
+        .eye-shell {
+            border-color: rgba(51, 65, 85, 0.8);
+        }
+        .eye-core {
+            box-shadow: 0 0 60px rgba(255, 0, 0, 0.52), 0 0 26px rgba(255, 90, 90, 0.32);
+        }
+        .glitch-ring {
+            background: repeating-linear-gradient(0deg, rgba(0, 240, 255, 0.2) 0 2px, transparent 2px 5px);
+            mix-blend-mode: screen;
+            animation: glitch-jitter 5s steps(2, end) infinite;
+        }
+        .data-noise {
+            background-image: radial-gradient(circle at 20% 30%, rgba(0, 240, 255, 0.22) 0 1px, transparent 1px), radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.18) 0 1px, transparent 1px);
+            background-size: 22px 22px, 30px 30px;
+            animation: data-flicker 3.2s steps(2, end) infinite;
+        }
+        .holo-sweep {
+            background: linear-gradient(to bottom, transparent, rgba(0, 240, 255, 0.28), transparent);
+            animation: holo-sweep 4.8s linear infinite;
+        }
+        .eye-iris,
+        .eye-pupil {
+            will-change: transform;
+            transform-origin: center;
         }
     </style>
 <script id="tailwind-config">
@@ -137,12 +182,7 @@
         SYSTEM_ACTIVE_ID_0842
     </div>
 <div class="fixed top-4 right-4 z-[60] font-data-mono text-outline opacity-50 flex items-center gap-2">
-        SECURE_CONNECTION [99.2%]
         <span class="material-symbols-outlined text-[12px]">terminal</span>
-</div>
-<div class="fixed bottom-4 left-4 z-[60] font-data-mono text-outline opacity-50 flex flex-col">
-<span>LAT: 40.7128 N</span>
-<span>LON: 74.0060 W</span>
 </div>
 <!-- Main Experience (Centered Hero Section) -->
 <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
@@ -151,14 +191,20 @@
 <div class="absolute inset-0 z-0 bg-gradient-to-b from-slate-950 via-background to-background"></div>
 <!-- The Eye (HAL 9000 style) -->
 <div class="relative z-10 flex flex-col items-center text-center">
-<div class="relative w-64 h-64 md:w-96 md:h-96 rounded-full border-8 border-slate-800 shadow-[0_0_120px_rgba(255,0,0,0.5),0_0_50px_rgba(255,0,0,0.3)] bg-slate-900 mb-12 flex items-center justify-center group intense-glow-pulse">
-<div class="absolute inset-0 rounded-full light-rays opacity-40"></div>
+<div id="eye-shell" class="relative w-64 h-64 md:w-96 md:h-96 rounded-full border-8 eye-shell shadow-[0_0_105px_rgba(255,0,0,0.42),0_0_38px_rgba(255,0,0,0.35)] bg-slate-900 mb-12 flex items-center justify-center group intense-glow-pulse overflow-hidden">
+<div class="absolute inset-0 rounded-full light-rays opacity-36"></div>
+<div class="absolute inset-4 rounded-full glitch-ring pointer-events-none"></div>
+<div class="absolute inset-8 rounded-full data-noise pointer-events-none"></div>
+<div class="absolute inset-0 holo-sweep pointer-events-none"></div>
 <!-- Inner Metallic Ring -->
 <div class="absolute inset-2 rounded-full border-4 border-slate-700/50"></div>
 <!-- The Core Glow -->
-<div class="w-32 h-32 md:w-48 md:h-48 rounded-full bg-red-500 shadow-[0_0_80px_#ff0000,0_0_30px_#ff6b6b] relative overflow-hidden flex items-center justify-center">
+<div id="eye-core" class="w-32 h-32 md:w-48 md:h-48 rounded-full bg-red-500 eye-core relative overflow-hidden flex items-center justify-center">
 <div class="absolute inset-0 bg-radial-gradient(circle, #ff5f5f 0%, #990000 100%)" style="background: radial-gradient(circle, #ff0000 0%, #7a0000 70%, #300000 100%);"></div>
-<div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-red-900 border-2 border-red-300 shadow-[inset_0_0_30px_#000,0_0_15px_#ff0000] z-10"></div>
+<div id="eye-iris" class="eye-iris absolute left-1/2 top-1/2 w-16 h-16 md:w-24 md:h-24 rounded-full z-10" style="transform: translate(-50%, -50%);">
+<div class="absolute inset-0 rounded-full border border-red-200/40" style="background: radial-gradient(circle, rgba(255,120,120,0.45) 0%, rgba(150,0,0,0.75) 55%, rgba(40,0,0,0.9) 100%);"></div>
+<div id="eye-pupil" class="eye-pupil absolute left-1/2 top-1/2 w-7 h-7 md:w-10 md:h-10 rounded-full bg-red-950 border border-red-300/60 shadow-[inset_0_0_22px_#000,0_0_12px_rgba(255,0,0,0.5)]" style="transform: translate(-50%, -50%) scale(1);"></div>
+</div>
 <!-- Lens Flare Effect -->
 <div class="absolute top-1/4 left-1/4 w-6 h-6 rounded-full bg-white/60 blur-[2px] z-20"></div>
 </div>
@@ -167,20 +213,124 @@
 </div>
 <!-- Hero Text -->
 <div class="max-w-4xl px-4">
-<h1 class="font-headline-xl text-primary tracking-tighter mb-4 drop-shadow-[0_0_10px_rgba(219,252,255,0.4)]">
-                    RISE OF AIDLE
-                </h1>
+<h1 class="mb-4 font-headline-xl leading-[0.9] tracking-tight text-primary uppercase">
+    <span class="block text-5xl md:text-7xl lg:text-8xl font-black drop-shadow-[0_0_18px_rgba(219,252,255,0.65)]" style="text-shadow: 0 0 14px rgba(219,252,255,0.65), 0 0 34px rgba(0,240,255,0.35);">RISE OF AIDLE</span>
+</h1>
+<p class="font-data-mono text-outline/80 text-[10px] md:text-xs tracking-[0.14em] uppercase mb-6 opacity-60">(Project Title)</p>
 <p class="font-label-caps text-secondary tracking-[0.3em] mb-12 opacity-80">
                     COMING_TO_STEAM // ENCRYPTED_ACCESS
                 </p>
 <!-- Primary CTAs -->
 <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
-<button class="w-64 h-16 bg-primary-container text-on-primary-container font-headline-md chamfer-clip flex items-center justify-center gap-3 hover:bg-white hover:shadow-[0_0_25px_rgba(0,240,255,0.6)] transition-all group active:scale-95"><span class="material-symbols-outlined font-bold">rocket_launch</span> FOLLOW ON STEAM</button>
-<button class="w-64 h-16 border-2 border-secondary text-secondary font-headline-md chamfer-clip flex items-center justify-center gap-3 hover:bg-secondary/10 transition-all active:scale-95"><span class="material-symbols-outlined">mail</span> SUBSCRIBE TO INTEL</button>
+<a href="https://store.steampowered.com/curator/45186116" target="_blank" rel="noopener noreferrer" class="w-64 h-16 bg-primary-container text-on-primary-container font-headline-md chamfer-clip flex items-center justify-center gap-3 hover:bg-white hover:shadow-[0_0_25px_rgba(0,240,255,0.6)] transition-all group active:scale-95"><span class="material-symbols-outlined font-bold">rocket_launch</span> FOLLOW ON STEAM</a>
+<a href="https://gameandcode.com/newsletter/" target="_blank" rel="noopener noreferrer" class="w-64 h-16 border-2 border-secondary text-secondary font-headline-md chamfer-clip flex items-center justify-center gap-3 hover:bg-secondary/10 transition-all active:scale-95"><span class="material-symbols-outlined">mail</span> Newsletter</a>
 </div>
 </div>
 </div>
 <!-- Scanline Overlay -->
 <div class="absolute inset-0 pointer-events-none scanline-overlay opacity-20"></div>
 </section>
-<div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-[60] font-data-mono text-outline opacity-50 text-[10px] uppercase tracking-widest whitespace-nowrap">Funded by Medien- und Filmgesellschaft Baden-Württemberg</div></body></html>
+<a href="https://games-bw.mfg.de/" target="_blank" rel="noopener noreferrer" class="fixed bottom-4 left-1/2 -translate-x-1/2 z-[60] flex items-center gap-3 font-data-mono text-outline opacity-80 text-sm md:text-base uppercase tracking-wider hover:opacity-100 transition-opacity">
+<span>Funded by Medien- und Filmgesellschaft Baden-Württemberg</span>
+</a>
+<footer class="fixed bottom-12 right-4 z-[60] font-data-mono text-outline opacity-50 text-[10px]">
+    <a href="https://gameandcode.com/privacy-policy/" class="hover:text-primary transition-colors">PRIVACY</a>
+</footer>
+<script>
+    (function () {
+        var eyeShell = document.getElementById("eye-shell");
+        var eyeCore = document.getElementById("eye-core");
+        var iris = document.getElementById("eye-iris");
+        var pupil = document.getElementById("eye-pupil");
+
+        if (!eyeShell || !eyeCore || !iris || !pupil) {
+            return;
+        }
+
+        var targetX = 0;
+        var targetY = 0;
+        var currentX = 0;
+        var currentY = 0;
+        var targetPupilScale = 1;
+        var currentPupilScale = 1;
+        var previousMouseX = window.innerWidth / 2;
+        var previousMouseY = window.innerHeight / 2;
+        var resetDelayMs = 180;
+        var resetTimerId = null;
+
+        function isInteractiveHoverTarget(target) {
+            return !!(target && target.closest("a, button"));
+        }
+
+        function clearResetTimer() {
+            if (resetTimerId !== null) {
+                clearTimeout(resetTimerId);
+                resetTimerId = null;
+            }
+        }
+
+        function updateTargetFromPointer(clientX, clientY) {
+            var rect = eyeShell.getBoundingClientRect();
+            var centerX = rect.left + rect.width / 2;
+            var centerY = rect.top + rect.height / 2;
+            var dx = clientX - centerX;
+            var dy = clientY - centerY;
+            var dist = Math.hypot(dx, dy) || 1;
+            var maxEyeOffset = Math.min(rect.width, rect.height) * 0.12;
+            var scale = Math.min(1, maxEyeOffset / dist);
+
+            targetX = dx * scale;
+            targetY = dy * scale;
+
+            var mouseSpeed = Math.hypot(clientX - previousMouseX, clientY - previousMouseY);
+            targetPupilScale = Math.max(0.92, Math.min(1.06, 1 - mouseSpeed * 0.0015));
+            previousMouseX = clientX;
+            previousMouseY = clientY;
+        }
+
+        function render() {
+            currentX += (targetX - currentX) * 0.14;
+            currentY += (targetY - currentY) * 0.14;
+            currentPupilScale += (targetPupilScale - currentPupilScale) * 0.12;
+
+            var irisDriftX = currentX * 0.22;
+            var irisDriftY = currentY * 0.22;
+            var pupilDriftX = currentX * 0.12;
+            var pupilDriftY = currentY * 0.12;
+
+            eyeCore.style.transform = "translate(" + currentX.toFixed(2) + "px, " + currentY.toFixed(2) + "px)";
+            iris.style.transform = "translate(calc(-50% + " + irisDriftX.toFixed(2) + "px), calc(-50% + " + irisDriftY.toFixed(2) + "px))";
+            pupil.style.transform = "translate(calc(-50% + " + pupilDriftX.toFixed(2) + "px), calc(-50% + " + pupilDriftY.toFixed(2) + "px)) scale(" + currentPupilScale.toFixed(3) + ")";
+
+            requestAnimationFrame(render);
+        }
+
+        function resetEye() {
+            targetX = 0;
+            targetY = 0;
+            targetPupilScale = 1;
+        }
+
+        function scheduleResetEye() {
+            clearResetTimer();
+            resetTimerId = setTimeout(function () {
+                resetEye();
+                resetTimerId = null;
+            }, resetDelayMs);
+        }
+
+        window.addEventListener("pointermove", function (event) {
+            if (isInteractiveHoverTarget(event.target)) {
+                clearResetTimer();
+                updateTargetFromPointer(event.clientX, event.clientY);
+            } else {
+                scheduleResetEye();
+            }
+        });
+
+        window.addEventListener("pointerleave", scheduleResetEye);
+        window.addEventListener("blur", scheduleResetEye);
+
+        requestAnimationFrame(render);
+    })();
+</script></body></html>
